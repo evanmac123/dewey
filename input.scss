@@ -2,7 +2,7 @@
 $pink:#de4ae2;
 $purple: #644AE2;
 $white: #FFFFFF;
-$gray: #5A5A5A;
+$gray: #696969;
 
 .white{
   color: $white;
@@ -15,11 +15,6 @@ $gray: #5A5A5A;
 //gradient
 
 @mixin gradient {
-//background: #de4ae2; /* Old browsers */
-//background: -moz-linear-gradient(-45deg, $pink 0%, $purple 100%); /* FF3.6-15 */
-//background: -webkit-linear-gradient(-45deg, $pink 0%,$purple 100%); /* Chrome10-25,Safari5.1-6 */
-//background: linear-gradient(135deg, $pink 0%,$purple 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-//filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#de4ae2', endColorstr='#644ae2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 background: linear-gradient(105deg, #de4ae2, #644ae2);
 background-size: 400% 400%;
 
@@ -51,13 +46,17 @@ animation: backgroundchange 13s ease infinite;
 }
 
 
-body{
-font-size: 14px;
+body,html{
+font-size: 16px;
 width: 100%;
-height: 100%;
+padding:0;
+margin:0;
+overflow-x: hidden;
 font-family: Nunito, sans-serif;
 color: $gray;
+}
 
+body{
 
 h1,h2,h3,h4,{
   font-family: Nunito, sans-serif;
@@ -75,25 +74,21 @@ h1{
 
 h2{
   font-size: 1.7em;
+  color: $purple;
 }
 
 h3{
-  font-size: 1.1em;
-}
-
-h5{
+  font-size: 1.4em;
   font-family: Oxygen, sans-serif;
   font-weight: 700;
-  font-size: 1.1em;
-  margin: .8em 0;
+  color: $purple;
 }
 
-h6{
+h4{
   font-family: Oxygen, sans-serif;
   font-weight: 400;
-  font-size: 1.1em;
-  margin: .8em 0;
-
+  font-size: 1em;
+  color:gray;
 }
 
 a{
@@ -107,8 +102,10 @@ button, .button_white{
   padding: 8px 25px;
   background-color: $white;
   border-radius: 4px;
-  &_hover{
+  transition:.4s all;
+  &:hover{
     opacity:.7;
+    transition:.4s all;
   }
 }
 
@@ -118,18 +115,40 @@ button, .button_white{
   padding: 8px 25px;
   @include gradient;
   border-radius: 4px;
-  &_hover{
-    opacity:.7;
+}
+
+
+section{
+  float:left;
+  width: 100%;
+}
+
+@keyframes slide {
+  0%{
+    transform: translate3d(0, 0, 0);
+  }
+  100%{
+    transform: translate3d(-1000px, 0, 0); /* The image width */
+  }
+}
+@keyframes slide-back {
+  0%{
+    transform: translate3d(-1000px, 0, 0); /* The image width */
+  }
+  100%{
+    transform: translate3d(0, 0, 0);
   }
 }
 
   .header{
     @include gradient;
-
+    height: 100%;
+    overflow:hidden;
     .nav{
       width: 100%;
       padding: 20px 0;
-      position: relative;
+      position: absolute;
+      top:0;
 
       &_left{
         position:absolute;
@@ -156,9 +175,35 @@ button, .button_white{
         }
       }
     }
+    &_back{
+      overflow:hidden;
+      opacity:.2;
+      position: absolute;
+      width: 100%;
+
+    .sliding-back{
+      width: 3000px;
+      height: 224px;
+    }
+    .list-1{
+      background: url("assets/images/booklist-1.png") repeat-x;
+      animation: slide 80s linear infinite;
+    }
+    .list-2{
+      background: url("assets/images/booklist-2.png") repeat-x;
+      animation: slide-back 80s linear infinite;
+    }
+    .list-3{
+      background: url("assets/images/booklist-3.png") repeat-x;
+      animation: slide 80s linear infinite;
+      }
+    }
     &_banner{
       color: white;
-      padding: 50px 0;
+      height: 100%;
+      display:flex;
+      align-items: center;
+      top:0;
 
       &_left{
         justify-content: flex-start;
@@ -188,8 +233,14 @@ button, .button_white{
       padding: 20px 0;
       position:relative;
       @include dropshadow;
+      position:absolute;
+      bottom:0;
+
       &_text{
         text-align: left;
+        margin-top:10px;
+        font-size: 1.1em;
+        color:$gray;
       }
       .button_purple{
         text-align: right;
@@ -199,75 +250,147 @@ button, .button_white{
   }
   .content_container{
     text-align: center;
-    img{
-    }
-  }
-  .what{
-    padding: 60px 0;
-    img{
-      width: 40px;
-      height: 40px;
-    }
-    .icon2{
-      width: 25px;
-      margin-bottom: -2px;
-      height: auto;
-    }
-    h2{
-      color: $purple;
-      padding: 20px 0 0 0;
-    }
-    p{
-      color: $gray;
-    }
   }
   .mission{
-    @include gradient;
-    padding: 60px 0;
-    color: white;
+    display: flex;
+    color: $gray;
     text-align:left;
+    background-color: $white;
+    .split{
+      flex: 1;
+
+    }
+    .split-left{
+      background-image:url(assets/images/kids.jpg);
+      background-size:cover;
+    }
     img{
       width:100%;
     }
     &_text{
-      margin-top: 30px;
-      img{
-        width:80%;
-      }
-      .mission_awards{
-        margin-top: 10px;
-        font-style: italic;
-      }
+      margin: 40px;
+      padding: 40px;
+    }
+  }
+  .awards{
+    text-align: left;
+    background-image:url('assets/images/kids.jpg');
+    @include gradient;
+    color:$white;
+    padding:30px 0;
+    img{
+      width: 320px;
     }
   }
   .team{
-    padding: 60px;
-    h2{
+    padding: 60px 0;
+    .four{
+      padding:20px;
+    }
+    p{
+      font-size:14px;
+    }
+    h3{
       text-align:center;
       color: $purple;
+      margin: 20px 0 5px 0;
+    }
+    h4{
+      color:$gray;
     }
     img{
       width:100%;
     }
-    .second-row{
-      width: 74%;
-      margin-left: 13%;
+    .description{
+      padding: 0 0 40px 0 ;
     }
   }
   .contact{
     @include gradient;
-    padding: 80px;
-
+    padding: 80px 0;
+    fieldset{
+      border:0;
+      input, textarea{
+        width:100%;
+        color:$gray
+      }
+    }
+    h2{
+      color:$white;
+    }
+    form{
+      margin:0;
+    }
+    p{
+      color:$white;
+    }
     &_text{
       width:70%;
       margin-left: 15%;
       h2{
         margin-bottom: 6px;
       }
-      h6{
-        margin: 0 0 20px 0;
-        font-size:1em;
-      }
     }
   }
+}
+
+/* Larger than mobile */
+@media (max-width: 600px) {
+  body{
+    font-size:14px !important;
+
+  .header{
+    height:80%;
+  }
+
+  .header_banner_title{
+    font-size: 2.8em;
+  }
+
+  .header_status{
+    height: 115px;
+    text-align:center;
+    &_text{
+      text-align:center;
+      margin-bottom:10px;
+    }
+    .button_purple{
+      text-align:center;
+      float:none;
+    }
+  }
+
+  .header_banner_right{
+    display:none;
+  }
+  .header .nav_right_link{
+    padding: 0px 5px;
+  }
+
+  .mission {
+    display:block;
+    width:100%;
+    margin-top:20%;
+    .split{
+    width:100%;
+    flex:none;
+    }
+    .split-left{
+      height: 220px;
+    }
+    &_text{
+      padding:0;
+      margin:40px 0 40px 0 ;
+    }
+  }
+  .award_holder{
+    padding: 0 30px 30px 30px;
+    text-align:center;
+    font-size:1.4em;
+  }
+  .contact_text{
+    width:100%;
+    margin:0;
+  }
+}
 }
